@@ -2,118 +2,39 @@
 {
     public class Sismo
     {
-        //Atributos
-        private int id;
-        private float magnitud, profundidad, latitud, longitud;
-        private string region, fecha, hora;
-
         //Propiedades
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-        public float Magnitud
-        {
-            get
-            {
-                return magnitud;
-            }
-            set
-            {
-                magnitud = value;
-            }
-        }
-        public float Profundidad
-        {
-            get
-            {
-                return profundidad;
-            }
-            set
-            {
-                profundidad = value;
-            }
-        }
-        public float Latitud
-        {
-            get
-            {
-                return latitud;
-            }
-            set
-            {
-                latitud = value;
-            }
-        }
-        public float Longitud
-        {
-            get
-            {
-                return longitud;
-            }
-            set
-            {
-                longitud = value;
-            }
-        }
-        public string Region
-        {
-            get
-            {
-                return region;
-            }
-            set
-            {
-                region = value;
-            }
-        }
-        public string Fecha
-        {
-            get
-            {
-                return fecha;
-            }
-            set
-            {
-                fecha = value;
-            }
-        }
-        public string Hora
-        {
-            get
-            {
-                return hora;
-            }
-            set
-            {
-                hora = value;
-            }
-        }
+        public int Id { get; set; }       
+        public double Magnitud { get; set; }
+        public double Profundidad { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
+        public int Region { get; set; }
+        public string Fecha { get; set; }
+        public string Hora { get; set; }
 
         //Constructores de la clase
-        public Sismo(int id, string region, string fecha, string hora, float magnitud, float profundidad, float latitud, float longitud)
+        public Sismo(int region, string fecha, string hora, double magnitud, double profundidad, double latitud, double longitud)
         {
-            this.id = id;
-            this.region = region;
-            this.fecha = fecha;
-            this.hora = hora;
-            this.magnitud = magnitud;
-            this.profundidad = profundidad;
-            this.latitud = latitud;
-            this.longitud = longitud;
+            this.Id = 0;
+            this.Region = region;
+            this.Fecha = fecha;
+            this.Hora = hora;
+            this.Magnitud = magnitud;
+            this.Profundidad = profundidad;
+            this.Latitud = latitud;
+            this.Longitud = longitud;
         }
 
         public Sismo()
         {
-            id = 0;
-            region = "";
-            fecha = "";
-            hora = "";
-            magnitud = 0f;
-            profundidad = 0f;
-            latitud = 0f;
-            longitud = 0f;
+            Id = 0;
+            Region = 0;
+            Fecha = "";
+            Hora = "";
+            Magnitud = 0f;
+            Profundidad = 0f;
+            Latitud = 0f;
+            Longitud = 0f;
         }
     }
 }

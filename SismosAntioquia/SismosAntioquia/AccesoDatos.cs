@@ -44,7 +44,7 @@ namespace SismosAntioquia
 
             using (SQLiteConnection cxnDB = new SQLiteConnection(cadenaConexion))
             {
-                SQLiteDataAdapter daSismos = new SQLiteDataAdapter("select distinct id, region, fecha, hora, latitud, longitud, round(magnitud,2) magnitud, round(profundidad,2) profundidad from temblores", cxnDB);
+                SQLiteDataAdapter daSismos = new SQLiteDataAdapter("select distinct id, region, fecha, hora, latitud, longitud, magnitud, profundidad from v_detalle_sismos", cxnDB);
                 daSismos.Fill(tablaResultado);
                 return tablaResultado;
             }
@@ -57,8 +57,7 @@ namespace SismosAntioquia
 
             using (SQLiteConnection cxnDB = new SQLiteConnection(cadenaConexion))
             {
-                string sentenciaSQL = "select distinct region, count(id) total_sismos, round(avg(profundidad), 2) prom_profundidad, round(avg(magnitud), 2) prom_magnitud from temblores group by region";
-                
+                string sentenciaSQL = "select distinct region, total_sismos, prom_profundidad, prom_magnitud from v_consolidado_region; ";
                 SQLiteDataAdapter daSismos = new SQLiteDataAdapter(sentenciaSQL, cxnDB);
                 daSismos.Fill(tablaResultado);
                 return tablaResultado;
@@ -74,9 +73,99 @@ namespace SismosAntioquia
 
             using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
             {
-                cxnDB.Execute("insert into temblores (fecha,hora,magnitud,profundidad, latitud, longitud, region) " +
+                cxnDB.Execute("insert into temblores (fecha,hora,magnitud,profundidad, latitud, longitud, id_region) " +
                     "values (@Fecha, @Hora, @Magnitud, @Profundidad, @Latitud, @Longitud, @Region)", unSismo);
             }
+        }
+
+        public static int ObtieneIdRegion(string nombreRegion)
+        {
+            int resultado = 0;
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                string sentenciaSQL = "select id from regiones where nombre = @nombre";
+
+                //El Id se asigna como parametro de la sentencia, 
+                DynamicParameters parametrosSentencia = new DynamicParameters();
+                parametrosSentencia.Add("@nombre", nombreRegion, DbType.String, ParameterDirection.Input);
+
+                var salida = cxnDB.Query<int>(sentenciaSQL, parametrosSentencia);
+
+                //validamos cuantos registros devuelve la lista
+                if (salida.ToArray().Length != 0)
+                    resultado = salida.First();
+            }
+
+            return resultado;
+        }
+
+        /// <summary>
+        /// Obtiene las coordenadas de la región
+        /// </summary>
+        /// <param name="nombreRegion">Nombre de la región</param>
+        /// <param name="latitud">Componente de latitud de la coordenada</param>
+        /// <param name="longitud">Componente de la longitud de la coordenada</param>
+        public static void ObtieneCoordenadasRegion(string nombreRegion, out double latitud, out double longitud)
+        { 
+            latitud = 0;
+            longitud = 0;
+
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                //El Id se asigna como parametro de la sentencia, 
+                DynamicParameters parametrosSentencia = new DynamicParameters();
+                parametrosSentencia.Add("@nombre", nombreRegion, DbType.String, ParameterDirection.Input);
+
+                string latitudSQL = "select latitud from regiones where nombre = @nombre";
+                var salidaLatitud = cxnDB.Query<double>(latitudSQL, parametrosSentencia);
+
+                //validamos cuantos registros devuelve la lista
+                if (salidaLatitud.ToArray().Length != 0)
+                    latitud = salidaLatitud.First();
+
+                string longitudSQL = "select longitud from regiones where nombre = @nombre";
+                var salidaLongitud = cxnDB.Query<double>(longitudSQL, parametrosSentencia);
+
+                //validamos cuantos registros devuelve la lista
+                if (salidaLongitud.ToArray().Length != 0)
+                    longitud = salidaLongitud.First();
+
+            }
+        }
+
+        /// <summary>
+        /// Elimina un sismo de la DB
+        /// </summary>
+        /// <param name="idSismo">ID del sismo a eliminar</param>
+        public static bool EliminarSismo(int idSismo)
+        {
+            bool resultado = false;
+            int totalRegistros = 0;
+
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+
+                // se define la sentencia SQL a utilizar, pero sin concatenar el id
+                string sentenciaSQL = "delete from temblores where id = @id";
+
+                //El Id se asigna como parametro de la sentencia, 
+                DynamicParameters parametrosSentencia = new DynamicParameters();
+                parametrosSentencia.Add("@id", idSismo, DbType.Int32, ParameterDirection.Input);
+
+                totalRegistros = cxnDB.Execute(sentenciaSQL, parametrosSentencia);
+
+                // Si la cantidad de registros es diferente de 0, se encontró y eliminó registro
+                if (totalRegistros != 0)
+                    resultado = true;
+            }
+
+            return resultado;
         }
     }
 }
