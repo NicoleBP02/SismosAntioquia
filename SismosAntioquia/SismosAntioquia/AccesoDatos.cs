@@ -49,5 +49,34 @@ namespace SismosAntioquia
                 return tablaResultado;
             }
         }
+
+        public static DataTable ObtenerConsolidadoRegion()
+        {
+            DataTable tablaResultado = new DataTable();
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (SQLiteConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                string sentenciaSQL = "select distinct region, count(id) total_sismos, round(avg(profundidad), 2) prom_profundidad, round(avg(magnitud), 2) prom_magnitud from temblores group by region";
+                
+                SQLiteDataAdapter daSismos = new SQLiteDataAdapter(sentenciaSQL, cxnDB);
+                daSismos.Fill(tablaResultado);
+                return tablaResultado;
+            }
+        }
+
+        /// <summary>
+        /// Registra en la DB la información de un nuevo Sismo
+        /// </summary>
+        public static void GuardarSismo(Sismo unSismo)
+        {
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                cxnDB.Execute("insert into temblores (fecha,hora,magnitud,profundidad, latitud, longitud, region) " +
+                    "values (@Fecha, @Hora, @Magnitud, @Profundidad, @Latitud, @Longitud, @Region)", unSismo);
+            }
+        }
     }
 }
