@@ -8,7 +8,7 @@
         public double Profundidad { get; set; }
         public double Latitud { get; set; }
         public double Longitud { get; set; }
-        public int Region { get; set; }
+        public int Id_Region { get; set; }
         public string Fecha { get; set; }
         public string Hora { get; set; }
 
@@ -16,7 +16,7 @@
         public Sismo(int region, string fecha, string hora, double magnitud, double profundidad, double latitud, double longitud)
         {
             this.Id = 0;
-            this.Region = region;
+            this.Id_Region = region;
             this.Fecha = fecha;
             this.Hora = hora;
             this.Magnitud = magnitud;
@@ -28,7 +28,7 @@
         public Sismo()
         {
             Id = 0;
-            Region = 0;
+            Id_Region = 0;
             Fecha = "";
             Hora = "";
             Magnitud = 0f;

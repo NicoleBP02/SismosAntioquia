@@ -53,9 +53,30 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtIdSismoBorrar = new System.Windows.Forms.TextBox();
             this.btnBorrarSismo = new System.Windows.Forms.Button();
+            this.txtIdSismoBorrar = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridViewSismosMes = new System.Windows.Forms.DataGridView();
+            this.grupoEditarSismo = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.selectorHoraEditar = new System.Windows.Forms.DateTimePicker();
+            this.btnActualizarSismo = new System.Windows.Forms.Button();
+            this.selectorFechaEditar = new System.Windows.Forms.DateTimePicker();
+            this.txtLongitudEditar = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtLatitudEditar = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtProfundidadEditar = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtMagnitudEditar = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.comboBoxRegionesEditar = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.botonBuscarSismo = new System.Windows.Forms.Button();
+            this.txtIdSismoEditar = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetalleSismo)).BeginInit();
             this.tabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -63,7 +84,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConsolidadoRegion)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSismosMes)).BeginInit();
+            this.grupoEditarSismo.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewDetalleSismo
@@ -90,6 +115,7 @@
             // 
             this.tabControl3.Controls.Add(this.tabPage1);
             this.tabControl3.Controls.Add(this.tabPage2);
+            this.tabControl3.Controls.Add(this.tabPage3);
             this.tabControl3.Location = new System.Drawing.Point(323, 50);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
@@ -138,7 +164,7 @@
             this.tabControl2.Location = new System.Drawing.Point(12, 50);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(276, 350);
+            this.tabControl2.Size = new System.Drawing.Size(276, 440);
             this.tabControl2.TabIndex = 5;
             // 
             // tabPage4
@@ -161,7 +187,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(268, 324);
+            this.tabPage4.Size = new System.Drawing.Size(268, 414);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Agregar Sismo";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -296,10 +322,14 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.txtIdSismoEditar);
+            this.tabPage5.Controls.Add(this.label17);
+            this.tabPage5.Controls.Add(this.botonBuscarSismo);
+            this.tabPage5.Controls.Add(this.grupoEditarSismo);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(268, 324);
+            this.tabPage5.Size = new System.Drawing.Size(268, 414);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Editar Sismo";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -317,22 +347,6 @@
             this.tabPage6.Text = "Borrar Sismo";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Id Sismo:";
-            // 
-            // txtIdSismoBorrar
-            // 
-            this.txtIdSismoBorrar.Location = new System.Drawing.Point(83, 44);
-            this.txtIdSismoBorrar.Name = "txtIdSismoBorrar";
-            this.txtIdSismoBorrar.Size = new System.Drawing.Size(100, 20);
-            this.txtIdSismoBorrar.TabIndex = 1;
-            // 
             // btnBorrarSismo
             // 
             this.btnBorrarSismo.Location = new System.Drawing.Point(30, 92);
@@ -343,14 +357,232 @@
             this.btnBorrarSismo.UseVisualStyleBackColor = true;
             this.btnBorrarSismo.Click += new System.EventHandler(this.btnBorrarSismo_Click);
             // 
+            // txtIdSismoBorrar
+            // 
+            this.txtIdSismoBorrar.Location = new System.Drawing.Point(83, 44);
+            this.txtIdSismoBorrar.Name = "txtIdSismoBorrar";
+            this.txtIdSismoBorrar.Size = new System.Drawing.Size(100, 20);
+            this.txtIdSismoBorrar.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Id Sismo:";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dataGridViewSismosMes);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(521, 259);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Consolidado por mes";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewSismosMes
+            // 
+            this.dataGridViewSismosMes.AllowUserToAddRows = false;
+            this.dataGridViewSismosMes.AllowUserToDeleteRows = false;
+            this.dataGridViewSismosMes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSismosMes.Location = new System.Drawing.Point(7, 7);
+            this.dataGridViewSismosMes.Name = "dataGridViewSismosMes";
+            this.dataGridViewSismosMes.ReadOnly = true;
+            this.dataGridViewSismosMes.Size = new System.Drawing.Size(426, 246);
+            this.dataGridViewSismosMes.TabIndex = 0;
+            // 
+            // grupoEditarSismo
+            // 
+            this.grupoEditarSismo.Controls.Add(this.label10);
+            this.grupoEditarSismo.Controls.Add(this.label11);
+            this.grupoEditarSismo.Controls.Add(this.selectorHoraEditar);
+            this.grupoEditarSismo.Controls.Add(this.btnActualizarSismo);
+            this.grupoEditarSismo.Controls.Add(this.selectorFechaEditar);
+            this.grupoEditarSismo.Controls.Add(this.txtLongitudEditar);
+            this.grupoEditarSismo.Controls.Add(this.label12);
+            this.grupoEditarSismo.Controls.Add(this.txtLatitudEditar);
+            this.grupoEditarSismo.Controls.Add(this.label13);
+            this.grupoEditarSismo.Controls.Add(this.txtProfundidadEditar);
+            this.grupoEditarSismo.Controls.Add(this.label14);
+            this.grupoEditarSismo.Controls.Add(this.txtMagnitudEditar);
+            this.grupoEditarSismo.Controls.Add(this.label15);
+            this.grupoEditarSismo.Controls.Add(this.comboBoxRegionesEditar);
+            this.grupoEditarSismo.Controls.Add(this.label16);
+            this.grupoEditarSismo.Location = new System.Drawing.Point(6, 87);
+            this.grupoEditarSismo.Name = "grupoEditarSismo";
+            this.grupoEditarSismo.Size = new System.Drawing.Size(245, 309);
+            this.grupoEditarSismo.TabIndex = 0;
+            this.grupoEditarSismo.TabStop = false;
+            this.grupoEditarSismo.Text = "Editar Sismo:";
+            this.grupoEditarSismo.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(43, 237);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(33, 13);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Hora:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(36, 214);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 13);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Fecha:";
+            // 
+            // selectorHoraEditar
+            // 
+            this.selectorHoraEditar.CustomFormat = "HH:mm:ss";
+            this.selectorHoraEditar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.selectorHoraEditar.Location = new System.Drawing.Point(81, 234);
+            this.selectorHoraEditar.Name = "selectorHoraEditar";
+            this.selectorHoraEditar.Size = new System.Drawing.Size(100, 20);
+            this.selectorHoraEditar.TabIndex = 29;
+            // 
+            // btnActualizarSismo
+            // 
+            this.btnActualizarSismo.Location = new System.Drawing.Point(69, 270);
+            this.btnActualizarSismo.Name = "btnActualizarSismo";
+            this.btnActualizarSismo.Size = new System.Drawing.Size(112, 23);
+            this.btnActualizarSismo.TabIndex = 28;
+            this.btnActualizarSismo.Text = "Actualizar Sismo";
+            this.btnActualizarSismo.UseVisualStyleBackColor = true;
+            this.btnActualizarSismo.Click += new System.EventHandler(this.btnActualizarSismo_Click);
+            // 
+            // selectorFechaEditar
+            // 
+            this.selectorFechaEditar.CustomFormat = "dd/MM/yyyy";
+            this.selectorFechaEditar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.selectorFechaEditar.Location = new System.Drawing.Point(81, 207);
+            this.selectorFechaEditar.Name = "selectorFechaEditar";
+            this.selectorFechaEditar.Size = new System.Drawing.Size(100, 20);
+            this.selectorFechaEditar.TabIndex = 27;
+            // 
+            // txtLongitudEditar
+            // 
+            this.txtLongitudEditar.Location = new System.Drawing.Point(81, 171);
+            this.txtLongitudEditar.Name = "txtLongitudEditar";
+            this.txtLongitudEditar.Size = new System.Drawing.Size(100, 20);
+            this.txtLongitudEditar.TabIndex = 26;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(28, 171);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(48, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Longitud";
+            // 
+            // txtLatitudEditar
+            // 
+            this.txtLatitudEditar.Location = new System.Drawing.Point(81, 136);
+            this.txtLatitudEditar.Name = "txtLatitudEditar";
+            this.txtLatitudEditar.Size = new System.Drawing.Size(100, 20);
+            this.txtLatitudEditar.TabIndex = 24;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(37, 136);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Latitud";
+            // 
+            // txtProfundidadEditar
+            // 
+            this.txtProfundidadEditar.Location = new System.Drawing.Point(81, 101);
+            this.txtProfundidadEditar.Name = "txtProfundidadEditar";
+            this.txtProfundidadEditar.Size = new System.Drawing.Size(100, 20);
+            this.txtProfundidadEditar.TabIndex = 22;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 101);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(64, 13);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Profundidad";
+            // 
+            // txtMagnitudEditar
+            // 
+            this.txtMagnitudEditar.Location = new System.Drawing.Point(81, 63);
+            this.txtMagnitudEditar.Name = "txtMagnitudEditar";
+            this.txtMagnitudEditar.Size = new System.Drawing.Size(100, 20);
+            this.txtMagnitudEditar.TabIndex = 20;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(22, 67);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(54, 13);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "Magnitud:";
+            // 
+            // comboBoxRegionesEditar
+            // 
+            this.comboBoxRegionesEditar.FormattingEnabled = true;
+            this.comboBoxRegionesEditar.Location = new System.Drawing.Point(69, 27);
+            this.comboBoxRegionesEditar.Name = "comboBoxRegionesEditar";
+            this.comboBoxRegionesEditar.Size = new System.Drawing.Size(163, 21);
+            this.comboBoxRegionesEditar.TabIndex = 18;
+            this.comboBoxRegionesEditar.SelectedIndexChanged += new System.EventHandler(this.comboBoxRegionesEditar_SelectedIndexChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(19, 30);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 13);
+            this.label16.TabIndex = 17;
+            this.label16.Text = "Región:";
+            // 
+            // botonBuscarSismo
+            // 
+            this.botonBuscarSismo.Location = new System.Drawing.Point(163, 34);
+            this.botonBuscarSismo.Name = "botonBuscarSismo";
+            this.botonBuscarSismo.Size = new System.Drawing.Size(75, 23);
+            this.botonBuscarSismo.TabIndex = 1;
+            this.botonBuscarSismo.Text = "Buscar";
+            this.botonBuscarSismo.UseVisualStyleBackColor = true;
+            this.botonBuscarSismo.Click += new System.EventHandler(this.botonBuscarSismo_Click);
+            // 
+            // txtIdSismoEditar
+            // 
+            this.txtIdSismoEditar.Location = new System.Drawing.Point(87, 37);
+            this.txtIdSismoEditar.Name = "txtIdSismoEditar";
+            this.txtIdSismoEditar.Size = new System.Drawing.Size(66, 20);
+            this.txtIdSismoEditar.TabIndex = 22;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(28, 41);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(48, 13);
+            this.label17.TabIndex = 21;
+            this.label17.Text = "Id sismo:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 450);
+            this.ClientSize = new System.Drawing.Size(869, 512);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl3);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sismos Antioquia 2019 - 2021";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDetalleSismo)).EndInit();
@@ -362,8 +594,14 @@
             this.tabControl2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSismosMes)).EndInit();
+            this.grupoEditarSismo.ResumeLayout(false);
+            this.grupoEditarSismo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -397,6 +635,27 @@
         private System.Windows.Forms.Button btnBorrarSismo;
         private System.Windows.Forms.TextBox txtIdSismoBorrar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dataGridViewSismosMes;
+        private System.Windows.Forms.GroupBox grupoEditarSismo;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker selectorHoraEditar;
+        private System.Windows.Forms.Button btnActualizarSismo;
+        private System.Windows.Forms.DateTimePicker selectorFechaEditar;
+        private System.Windows.Forms.TextBox txtLongitudEditar;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtLatitudEditar;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtProfundidadEditar;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtMagnitudEditar;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox comboBoxRegionesEditar;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button botonBuscarSismo;
+        private System.Windows.Forms.TextBox txtIdSismoEditar;
+        private System.Windows.Forms.Label label17;
     }
 }
 

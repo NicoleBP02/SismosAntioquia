@@ -17,7 +17,6 @@ namespace SismosAntioquia
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
-
         /// <summary>
         /// Obtiene una lista con los nombres de las regiones - Utiliza Dapper
         /// </summary>
@@ -31,7 +30,6 @@ namespace SismosAntioquia
                 return salida.ToList();
             }
         }
-
 
         /// <summary>
         /// Obtiene una tabla con los sismos registrados en la DB
@@ -50,6 +48,28 @@ namespace SismosAntioquia
             }
         }
 
+        /// <summary>
+        /// Obtiene un datatable con los sismos consolidados por mes
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable ObtenerSismosMes()
+        {
+            DataTable tablaResultado = new DataTable();
+
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (SQLiteConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                SQLiteDataAdapter daSismos = new SQLiteDataAdapter("select anno año, mes, total from v_sismos_mes; ", cxnDB);
+                daSismos.Fill(tablaResultado);
+                return tablaResultado;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene un datatable con los sismos consolidados por region
+        /// </summary>
+        /// <returns></returns>
         public static DataTable ObtenerConsolidadoRegion()
         {
             DataTable tablaResultado = new DataTable();
@@ -74,10 +94,15 @@ namespace SismosAntioquia
             using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
             {
                 cxnDB.Execute("insert into temblores (fecha,hora,magnitud,profundidad, latitud, longitud, id_region) " +
-                    "values (@Fecha, @Hora, @Magnitud, @Profundidad, @Latitud, @Longitud, @Region)", unSismo);
+                    "values (@Fecha, @Hora, @Magnitud, @Profundidad, @Latitud, @Longitud, @Id_Region)", unSismo);
             }
         }
 
+        /// <summary>
+        /// Obtiene el Id de la región a partir de los nombres
+        /// </summary>
+        /// <param name="nombreRegion"></param>
+        /// <returns></returns>
         public static int ObtieneIdRegion(string nombreRegion)
         {
             int resultado = 0;
@@ -92,6 +117,34 @@ namespace SismosAntioquia
                 parametrosSentencia.Add("@nombre", nombreRegion, DbType.String, ParameterDirection.Input);
 
                 var salida = cxnDB.Query<int>(sentenciaSQL, parametrosSentencia);
+
+                //validamos cuantos registros devuelve la lista
+                if (salida.ToArray().Length != 0)
+                    resultado = salida.First();
+            }
+
+            return resultado;
+        }
+
+        /// <summary>
+        /// Obtiene el nombre de la región a partir de su id
+        /// </summary>
+        /// <param name="idRegion">Id de la región</param>
+        /// <returns></returns>
+        public static string ObtieneNombreRegion(int idRegion)
+        {
+            string resultado = "";
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                string sentenciaSQL = "select nombre from regiones where id = @id";
+
+                //El Id se asigna como parametro de la sentencia, 
+                DynamicParameters parametrosSentencia = new DynamicParameters();
+                parametrosSentencia.Add("@id", idRegion, DbType.Int32, ParameterDirection.Input);
+
+                var salida = cxnDB.Query<string>(sentenciaSQL, parametrosSentencia);
 
                 //validamos cuantos registros devuelve la lista
                 if (salida.ToArray().Length != 0)
@@ -138,7 +191,7 @@ namespace SismosAntioquia
         }
 
         /// <summary>
-        /// Elimina un sismo de la DB
+        /// Elimina un sismo
         /// </summary>
         /// <param name="idSismo">ID del sismo a eliminar</param>
         public static bool EliminarSismo(int idSismo)
@@ -166,6 +219,59 @@ namespace SismosAntioquia
             }
 
             return resultado;
+        }
+
+        /// <summary>
+        /// Obtiene la información de un sismo
+        /// </summary>
+        /// <param name="idSismo">ID que identifica un Sismo</param>
+        /// <returns></returns>
+        public static Sismo ObtenerSismo(int idSismo)
+        {
+            Sismo sismoResultado = new Sismo();
+
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+
+                // se define la sentencia SQL a utilizar, pero sin concatenar el id
+                string sentenciaSQL = "select id, fecha, hora, magnitud,profundidad,latitud,longitud,id_region from temblores where id = @id";
+
+                //El Id se asigna como parametro de la sentencia, 
+                DynamicParameters parametrosSentencia = new DynamicParameters();
+                parametrosSentencia.Add("@id", idSismo, DbType.Int32, ParameterDirection.Input);
+
+                var salida = cxnDB.Query<Sismo>(sentenciaSQL, parametrosSentencia);
+
+                //validamos cuantos registros devuelve la lista
+                if (salida.ToArray().Length != 0)
+                    sismoResultado = salida.First();
+
+                return sismoResultado;
+            }
+        }
+
+        /// <summary>
+        /// Actualiza un sismo
+        /// </summary>
+        /// <param name="unSismo">Objeto que representa un sismo</param>
+        public static void ActualizarSismo(Sismo unSismo)
+        {
+            string cadenaConexion = ObtenerCadenaConexion("SismosDB");
+
+            using (IDbConnection cxnDB = new SQLiteConnection(cadenaConexion))
+            {
+                cxnDB.Execute("update temblores set " +
+                    "fecha = @Fecha," +
+                    "hora = @Hora," +
+                    "magnitud = @Magnitud," +
+                    "profundidad = @Profundidad," +
+                    "latitud = @Latitud, " +
+                    "longitud = @Longitud, " +
+                    "id_region = @Id_Region " +
+                    "where id = @Id", unSismo);
+            }
         }
     }
 }

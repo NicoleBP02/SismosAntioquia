@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD71B3E4-BA5D-4551-A3AA-5CBF00194069}</ProjectGuid>
+    <ProjectGuid>{E7367DDC-EABF-4880-8813-3CE913DF5BA4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>SismosAntioquia</RootNamespace>
     <AssemblyName>SismosAntioquia</AssemblyName>
@@ -102,7 +102,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="sismosAntioquia.sqlite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
